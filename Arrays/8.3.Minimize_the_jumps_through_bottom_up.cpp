@@ -30,7 +30,7 @@ int minJumps(int arr[], int n)
 
             {
 
-                jumps[i] = min(jumps[i], jumps[j] + 1);
+                jumps[i] = min(jumps[i], jumps[j] + 1); // the minimum number of jumps + 1(for the next jump)
 
                 break;
             }
