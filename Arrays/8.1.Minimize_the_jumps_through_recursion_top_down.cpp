@@ -4,6 +4,7 @@
 #include <cstring>
 using namespace std;
 
+int dp[10000];
 int minJumps(int arr[], int l, int h)
 
 {
@@ -20,6 +21,8 @@ int minJumps(int arr[], int l, int h)
 
         return INT_MAX;
 
+    if (dp[l] != -1) // to check whether already present
+        return dp[l];
     // Traverse through all the points reachable from arr[l]. Recursively
 
     // get the minimum number of jumps needed to reach arr[h] from these
@@ -39,17 +42,17 @@ int minJumps(int arr[], int l, int h)
             min = jumps + 1;
     }
 
-    return min;
+    return dp[l] = min;
 }
 int main(void)
 {
     int N = 11;
-    int arr[100] = {1, 3, 5, 0, 0, 1, 6, 7, 6, 0, 9};
+    int arr[100] = {1, 3, 1, 4, 0, 1, 2, 1, 6, 0, 9};
 
     // int N = 5; // test case
-    // int arr[100] = {1, 1, 2, 0, 4};
-
-    int x = minJumps(arr, 0, N);
+    // int arr[100] = {1, 1, 1, 1, 4};
+    memset(dp, -1, sizeof(dp));
+    int x = minJumps(arr, 0, N - 1);
     if (x == INT_MAX)
     {
         cout << "-1";
