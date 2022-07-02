@@ -3,24 +3,44 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-int dp[10000][10000]; // dp[i][sum]
-int solveTopDown(int i, int arr[], int n, int sum)
+
+int minJumps(int arr[], int l, int h)
+
 {
-    if (i >= n - 1)
-        return sum;
-    if (dp[i][sum] > 0)
-        return dp[i][sum];
 
-    int res = INT_MAX;
+    // Base case: when source and destination are same
 
-    for (int j = 1; j <= arr[i]; j++)
+    if (h == l)
+
+        return 0;
+
+    // When nothing is reachable from the given source
+
+    if (arr[l] == 0)
+
+        return INT_MAX;
+
+    // Traverse through all the points reachable from arr[l]. Recursively
+
+    // get the minimum number of jumps needed to reach arr[h] from these
+
+    // reachable points.
+
+    int min = INT_MAX;
+
+    for (int i = l + 1; i <= h && i <= l + arr[l]; i++)
+
     {
-        res = min(res, solveTopDown(i + j, arr, n, sum + 1));
-    }
-    // cout << res << endl;
-    return dp[i][sum] = res;
-}
 
+        int jumps = minJumps(arr, i, h);
+
+        if (jumps != INT_MAX && jumps + 1 < min)
+
+            min = jumps + 1;
+    }
+
+    return min;
+}
 int main(void)
 {
     int N = 11;
@@ -29,17 +49,7 @@ int main(void)
     // int N = 5; // test case
     // int arr[100] = {1, 1, 2, 0, 4};
 
-    memset(dp, -1, sizeof(dp));
-    for (int i = 0; i < N; i++)
-    {
-        dp[i][0] = INT_MAX;
-    }
-    for (int i = 0; i < N; i++)
-    {
-        dp[0][i] = 0;
-    }
-
-    int x = solveTopDown(0, arr, N, 0);
+    int x = minJumps(arr, 0, N);
     if (x == INT_MAX)
     {
         cout << "-1";
