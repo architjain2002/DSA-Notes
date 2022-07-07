@@ -7,7 +7,7 @@ class Solution
 {
 public:
     // Function to find the next greater element for each element of the array.
-    vector<long long> nextLargerElement(vector<long long> arr, int n)
+    vector<long long> nextLargerElementLeft(vector<long long> arr, int n)
     {
         stack<long> s;
         long *res = new long[n];
