@@ -12,7 +12,7 @@ class Solution
 public:
     int getPairsCount(int arr[], int n, int k)
     {
-        unordered_map<int, int> mp; // we do not use ordered map coz the insertion an other operations are O(n)
+        unordered_map<int, int> mp; // we do not use ordered map coz the insertion and other operations are O(n)
         int answer = 0;
 
         for (int i = 0; i < n; i++)
