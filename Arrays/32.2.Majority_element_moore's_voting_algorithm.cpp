@@ -1,5 +1,7 @@
 // C++ Program for finding out
 // majority element in an array
+
+// https://www.youtube.com/watch?v=n5QY3x_GNDg for reference
 #include <bits/stdc++.h>
 using namespace std;
 
