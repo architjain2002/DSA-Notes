@@ -8,13 +8,13 @@ public:
             return 0;
         }
         int i = 1;
-        int square = 0;
+        int square = 1;
 
         while (square < N)
         {
-            square = i * i;
             i++;
+            square = i * i;
         }
-        return i;
+        return i - 1;
     }
 };
