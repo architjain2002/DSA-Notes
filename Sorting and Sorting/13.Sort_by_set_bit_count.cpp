@@ -26,3 +26,4 @@ public:
         stable_sort(arr, arr + n, cmp);
         return;
     }
+}
