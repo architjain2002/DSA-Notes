@@ -1,66 +1,56 @@
+//{ Driver Code Starts
+/* Driver program to test above function */
 
-//  C++ program to divide a board into m*n squares
 #include <bits/stdc++.h>
 using namespace std;
 
-// method returns minimum cost to break board into
-// m*n squares
-int minimumCostOfBreaking(int X[], int Y[], int m, int n)
+// } Driver Code Ends
+// User function Template for C++
+
+class Solution
 {
-    int res = 0;
-
-    //  sort the horizontal cost in reverse order
-    sort(X, X + m, greater<int>());
-
-    //  sort the vertical cost in reverse order
-    sort(Y, Y + n, greater<int>());
-
-    //  initialize current width as 1
-    int hzntl = 1, vert = 1;
-
-    //  loop until one or both cost array are processed
-    int i = 0, j = 0;
-    while (i < m && j < n)
+public:
+    static bool greater(int a, int b)
     {
-        if (X[i] > Y[j])
-        {
-            res += X[i] * vert;
-
-            //  increase current horizontal part count by 1
-            hzntl++;
-            i++;
-        }
-        else
-        {
-            res += Y[j] * hzntl;
-
-            //  increase current vertical part count by 1
-            vert++;
-            j++;
-        }
+        return a > b;
     }
 
-    // loop for horizontal array, if remains
-    int total = 0;
-    while (i < m)
-        total += X[i++];
-    res += total * vert;
+    int minimumCostOfBreaking(vector<int> X, vector<int> Y, int M, int N)
+    {
+        sort(X.begin(), X.end(), greater);
 
-    // loop for vertical array, if remains
-    total = 0;
-    while (j < n)
-        total += Y[j++];
-    res += total * hzntl;
+        sort(Y.begin(), Y.end(), greater);
 
-    return res;
-}
+        int total = 0;
+        int count_hor = 1;
+        int count_ver = 1;
+        int i = 0, j = 0;
+        while (i < M - 1 && j < N - 1)
+        {
+            if (X[i] <= Y[j])
+            {
+                total = total + Y[j] * count_hor;
+                count_ver++;
+                j++;
+            }
 
-//  Driver code to test above methods
-int main()
-{
-    int m = 6, n = 4;
-    int X[m - 1] = {2, 1, 3, 1, 4};
-    int Y[n - 1] = {4, 1, 2};
-    cout << minimumCostOfBreaking(X, Y, m - 1, n - 1);
-    return 0;
-}
+            else
+            {
+                total = total + X[i] * count_ver;
+                count_hor++;
+                i++;
+            }
+        }
+
+        for (int ind = i; i < M - 1; i++)
+        {
+            total = total + count_ver * X[i];
+        }
+
+        for (int ind = j; j < N - 1; j++)
+        {
+            total = total + count_hor * Y[j];
+        }
+        return total;
+    }
+};
