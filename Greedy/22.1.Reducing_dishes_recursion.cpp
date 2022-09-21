@@ -15,9 +15,6 @@ public:
 
     int maxSatisfaction(vector<int> &satisfaction)
     {
-        // n dishes -- any dish in 1 time
-        //  to return max(time[i]* sat[i])
-
         sort(satisfaction.begin(), satisfaction.end());
         return solve(satisfaction, 0, 1);
     }
