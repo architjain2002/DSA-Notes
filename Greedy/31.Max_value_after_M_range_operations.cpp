@@ -16,7 +16,7 @@ int findMax(int n, int m, int a[], int b[], int k[])
         // let's try to get this with an example :
         // i=0 : arr[] becomes  [100,0,-100,0,0]
         // i=1 : 100,100,-100,0,0
-        // i=2 : 100,100,0,0,-100
+        // i=2 : 100,100,0,0,-100    // idea is to save the gradient at each index..which after prefix sum we can obtain the values
     }
 
     int res = INT_MIN;
